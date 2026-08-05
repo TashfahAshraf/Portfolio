@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tashfah Ashraf — Front-End Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grid-overlay" aria-hidden="true"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#hero" class="logo-tab">TA</a>
+    <nav class="main-nav" id="main-nav">
+      <a href="#hero" data-nav-link>Home</a>
+      <a href="#about" data-nav-link>About</a>
+      <a href="#skills" data-nav-link>Skills</a>
+      <a href="#experience" data-nav-link>Experience</a>
+      <a href="#projects" data-nav-link>Projects</a>
+      <a href="#contact" data-nav-link>Contact</a>
+    </nav>
+    <div class="topbar-controls">
+      <button class="mode-toggle" id="mode-toggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon" id="mode-icon"></i>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="sheet hero" id="hero">
+    <p class="sheet-label">Sheet 01 / Intro</p>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Tashfah Ashraf</h1>
+        <p class="hero-role">
+          <span class="typing-text" id="typing-text"></span>
+        </p>
+        <p class="hero-desc">I build clean, responsive interfaces and I'm currently sharpening my full-stack skills through hands-on projects and a Full Stack Web Development with AI certification.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View work</a>
+          <a href="#contact" class="btn btn-secondary">Contact</a>
+          <a href="Tashfah-Ashraf-CV.pdf" class="btn btn-secondary" download>
+            <i class="fa-solid fa-download"></i> Download CV
+          </a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://github.com/TashfahAshraf" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/tashfahashraf/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:tashfahashraf@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-frame">
+          <img src="1.jpg" alt="Portrait of Tashfah Ashraf" class="hero-photo" onerror="this.onerror=null;this.src='assets/avatar.svg';">
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid" data-reveal>
+      <div class="stat-card">
+        <p class="stat-number" data-count="4">0</p>
+        <p class="stat-label">Projects completed</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number" data-count="10">0</p>
+        <p class="stat-label">Technologies learned</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number" data-count="2">0</p>
+        <p class="stat-label">Certifications</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet about" id="about" data-reveal>
+    <p class="sheet-label">Sheet 02 / About</p>
+    <div class="about-content">
+      <div class="about-text">
+        <h2>About</h2>
+        <p>I'm an IT student specializing in full-stack web development, with hands-on experience building responsive websites using HTML, CSS, JavaScript, and PHP, alongside academic experience in Python-based AI/ML projects.</p>
+        <p>I'm currently completing a Full Stack Web Development with AI certification at ISTTA, Arfa Karim Towers, and I bring skills in version control (Git/GitHub), database fundamentals, and project ownership from managing university group projects. I'm looking to contribute to real-world web development teams.</p>
+      </div>
+      <div class="spec-panel">
+        <div class="spec-row">
+          <span class="spec-key">Education</span>
+          <span class="spec-val">BS Information Technology, UMT Lahore (2023&ndash;Expected 2027)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Focus</span>
+          <span class="spec-val">Full-stack web development</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Certifications</span>
+          <span class="spec-val">Full Stack Web Dev with AI (ISTTA, in progress) &middot; Certified Digital Media Marketer (PNY Trainings, 2024)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Based in</span>
+          <span class="spec-val">Lahore, Pakistan</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet skills" id="skills" data-reveal>
+    <p class="sheet-label">Sheet 03 / Skills</p>
+    <h2>Skills</h2>
+    <div class="skills-groups">
+
+      <div class="skills-group">
+        <h3>Frontend</h3>
+        <div class="skill-item" data-reveal style="--fill:95%">
+          <div class="skill-item-head"><span>HTML5</span><span>95%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+        <div class="skill-item" data-reveal style="--fill:90%">
+          <div class="skill-item-head"><span>CSS3</span><span>90%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+        <div class="skill-item" data-reveal style="--fill:80%">
+          <div class="skill-item-head"><span>JavaScript</span><span>80%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+        <div class="skill-item" data-reveal style="--fill:80%">
+          <div class="skill-item-head"><span>Bootstrap</span><span>80%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>Backend</h3>
+        <div class="skill-item" data-reveal style="--fill:70%">
+          <div class="skill-item-head"><span>PHP</span><span>70%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+        <div class="skill-item" data-reveal style="--fill:75%">
+          <div class="skill-item-head"><span>SQL</span><span>75%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>Programming</h3>
+        <div class="skill-item" data-reveal style="--fill:75%">
+          <div class="skill-item-head"><span>Python</span><span>75%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+        <div class="skill-item" data-reveal style="--fill:65%">
+          <div class="skill-item-head"><span>C++</span><span>65%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>Tools</h3>
+        <div class="skill-item" data-reveal style="--fill:85%">
+          <div class="skill-item-head"><span>Git &amp; GitHub</span><span>85%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sheet experience" id="experience" data-reveal>
+    <p class="sheet-label">Sheet 04 / Experience</p>
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-head">
+            <h3>IT Intern &mdash; Data Science Intern</h3>
+            <span class="timeline-date">Jul 2025 &ndash; Sep 2025</span>
+          </div>
+          <p class="timeline-org">Arch Technologies</p>
+          <ul>
+            <li>Assisted with system troubleshooting and backend configuration, collaborating with the technical team to resolve issues.</li>
+            <li>Prepared technical documentation to support ongoing development work and knowledge sharing.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet projects" id="projects" data-reveal>
+    <p class="sheet-label">Sheet 05 / Projects</p>
+    <h2>Projects</h2>
+
+    <div class="project-filters" id="project-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="frontend">Frontend</button>
+      <button class="filter-btn" data-filter="ai">AI</button>
+      <button class="filter-btn" data-filter="php">PHP</button>
+    </div>
+
+    <div class="project-grid">
+
+      <article class="project-card" data-reveal data-category="ai">
+        <div class="project-thumb">
+          <img src="https://source.unsplash.com/800x500/?traffic,highway" alt="CloudTraffic-AI dashboard screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
+          <i class="fa-solid fa-car-side thumb-fallback-icon"></i>
+        </div>
+        <div class="project-head">
+          <h3>CloudTraffic-AI</h3>
+        </div>
+        <p>An intelligent web-based multi-violation traffic enforcement and analytics platform. Detects speeding, wrong-way driving, illegal overtaking, and phone usage from camera video using deep learning, then serves the results through a live web dashboard.</p>
+        <div class="project-tags">
+          <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span>
+        </div>
+        <div class="project-links">
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> GitHub (Coming Soon)</span>
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal data-category="php">
+        <div class="project-thumb">
+          <img src="https://source.unsplash.com/800x500/?classroom,university" alt="Course Registration Portal screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
+          <i class="fa-solid fa-school thumb-fallback-icon"></i>
+        </div>
+        <div class="project-head">
+          <h3>Course Registration &amp; Login Portal</h3>
+        </div>
+        <p>A web portal with separate student and teacher login flows for handling course registration, built with a PHP back end and a responsive front end.</p>
+        <div class="project-tags">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span>
+        </div>
+        <div class="project-links">
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> GitHub (Coming Soon)</span>
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal data-category="frontend">
+        <div class="project-thumb">
+          <img src="https://source.unsplash.com/800x500/?event,calendar" alt="EventPage screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
+          <i class="fa-solid fa-calendar-days thumb-fallback-icon"></i>
+        </div>
+        <div class="project-head">
+          <h3>EventPage</h3>
+        </div>
+        <p>A team-built event listing page developed to practice real collaborative Git and GitHub workflows &mdash; branching, pull requests, code review, and resolving merge conflicts.</p>
+        <div class="project-tags">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span>
+        </div>
+        <div class="project-links">
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> GitHub (Coming Soon)</span>
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal data-category="ai">
+        <div class="project-thumb">
+          <img src="https://source.unsplash.com/800x500/?data,analytics" alt="Customer Segmentation project screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
+          <i class="fa-solid fa-chart-simple thumb-fallback-icon"></i>
+        </div>
+        <div class="project-head">
+          <h3>Customer Segmentation</h3>
+        </div>
+        <p>Applied K-Means clustering to group customers by behavior and value, surfacing patterns that could support more targeted marketing decisions.</p>
+        <div class="project-tags">
+          <span>Python</span><span>K-Means</span><span>Data analysis</span>
+        </div>
+        <div class="project-links">
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> GitHub (Coming Soon)</span>
+          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="sheet contact" id="contact" data-reveal>
+    <p class="sheet-label">Sheet 06 / Contact</p>
+    <h2>Contact</h2>
+    <div class="contact-content">
+      <p class="contact-intro">Have a role, project, or opportunity in mind? Send a message and I'll get back to you.</p>
+      <div class="contact-details">
+        <a href="mailto:tashfahashraf@gmail.com"><i class="fa-solid fa-envelope"></i> tashfahashraf@gmail.com</a>
+        <a href="tel:+923010067442"><i class="fa-solid fa-phone"></i> +92 301 0067442</a>
+      </div>
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+          <span class="error-msg" id="name-error"></span>
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="name@company.com" required>
+          <span class="error-msg" id="email-error"></span>
+        </div>
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about the opportunity" required></textarea>
+          <span class="error-msg" id="message-error"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+      <div class="socials">
+        <a href="https://github.com/TashfahAshraf" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/tashfahashraf/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="mailto:tashfahashraf@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="title-block">
+  <div class="footer-row">
+    <p>Tashfah Ashraf &copy; <span id="year"></span></p>
+    <div class="footer-socials">
+      <a href="https://github.com/TashfahAshraf" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/tashfahashraf/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="mailto:tashfahashraf@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+  <div class="footer-credit">
+    <p>Designed &amp; developed by Tashfah Ashraf</p>
+    <p>Built with HTML &bull; CSS &bull; JavaScript</p>
+  </div>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
