@@ -562,6 +562,18 @@ a { color: var(--blue); text-decoration: none; }
 
 .project-head i { font-size: 1.2rem; }
 
+.status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  opacity: 0.85;
+}
+
 .project-card p { font-size: 0.92rem; }
 
 .project-tags {
