@@ -3,432 +3,803 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tashfah Ashraf — Front-End Web Developer</title>
+<title>Tashfah Ashraf — Full-Stack Developer &amp; AI Enthusiast</title>
+<meta name="description" content="Portfolio of Tashfah Ashraf, a full-stack web developer specializing in HTML, CSS, JavaScript, PHP and applied machine learning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0509;
+    --panel:#1A1119;
+    --panel-2:#160E15;
+    --border:#2E2130;
+    --ink:#F6F1F4;
+    --muted:#B3A6B2;
+    --pink:#FF2E78;
+    --pink-soft:#FF2E7822;
+    --purple:#9D6BFF;
+    --blue:#4F8EF7;
+    --sans:'Inter', sans-serif;
+    --display:'Space Grotesk', sans-serif;
+    --radius:14px;
+    --nav-h:64px;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100vh;height:100dvh;margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow:hidden;}
+  a{color:inherit;text-decoration:none;}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;-webkit-appearance:none;appearance:none;}
+  ::selection{background:var(--pink);color:#fff;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--pink);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  .glow{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(60% 45% at 18% 0%, #5A1030 0%, transparent 60%),
+      radial-gradient(55% 50% at 85% 15%, #3B0E52 0%, transparent 60%),
+      radial-gradient(60% 45% at 50% 105%, #4A1220 0%, transparent 60%);
+  }
+
+  header{
+    position:fixed; top:0; left:0; right:0; height:var(--nav-h); z-index:60;
+    background:rgba(11,5,9,0.75); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center;
+  }
+  .nav-inner{max-width:1160px;margin:0 auto;width:100%;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .logo{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.02em;display:flex;align-items:center;gap:7px;white-space:nowrap;}
+  .logo .dot{width:7px;height:7px;border-radius:50%;background:var(--pink);}
+  .tabs{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    font-size:13.5px;color:var(--muted);white-space:nowrap;padding:6px 2px;position:relative;
+    background:none;border:none;cursor:pointer;font-family:var(--sans);
+  }
+  .tab::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--pink);transform:scaleX(0);transition:transform .2s;}
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--ink);font-weight:600;}
+  .tab.active::after{transform:scaleX(1);}
+
+  .viewport{position:fixed; top:var(--nav-h); left:0; right:0; bottom:0; overflow:hidden; z-index:1;}
+  .track{display:flex; height:100%; width:700%; transition:transform .6s cubic-bezier(.65,0,.35,1);}
+  .slide{width:calc(100% / 7); height:100%; overflow-y:auto; padding:48px 36px 76px; scrollbar-width:thin; scrollbar-color:var(--border) transparent;}
+  .slide::-webkit-scrollbar{width:6px;}
+  .slide::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+  .slide-inner{max-width:900px;margin:0 auto;height:100%;width:100%;}
+  .slide-inner.center{display:flex;flex-direction:column;justify-content:center;}
+  .slide-inner.top-align{padding-top:6px;}
+
+  .eyebrow-center{text-align:center;font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.08em;color:var(--pink);margin:0 0 10px;}
+  h2.center{font-family:var(--display);font-size:clamp(26px,4vw,38px);font-weight:700;text-align:center;margin:0 0 8px;}
+  .underline{width:52px;height:3px;background:var(--pink);border-radius:2px;margin:14px auto 34px;}
+
+  /* ---- HERO ---- */
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:48px;align-items:center;height:100%;}
+  @media (max-width:880px){.hero-grid{grid-template-columns:1fr;gap:30px;height:auto;padding-top:8px;}}
+  .badge-pill{
+    display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.03em;
+    color:#FFB3CC;background:var(--pink-soft);border:1px solid #FF2E7844;
+    padding:8px 16px;border-radius:999px;margin-bottom:22px;
+  }
+  .badge-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--pink);}
+  h1.name{font-family:var(--display);font-weight:700;font-size:clamp(32px,5.4vw,56px);line-height:1.06;margin:0 0 10px;}
+  .tagline{font-family:var(--display);font-weight:700;font-size:clamp(22px,3.4vw,32px);margin:0 0 20px;color:var(--ink);}
+  .tagline .accent{color:var(--pink);}
+  .role-line{font-size:16.5px;color:var(--muted);margin:0 0 26px;max-width:50ch;}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{font-family:var(--sans);font-size:13.5px;font-weight:600;padding:12px 22px;border-radius:9px;transition:transform .12s, background .15s, border-color .15s;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--pink);color:#fff;}
+  .btn-primary:hover{background:#FF528E;}
+  .btn-ghost{background:transparent;border-color:var(--border);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--pink);color:#FFB3CC;}
+
+  .developer-hero{
+    isolation:isolate;
+    background:
+      radial-gradient(circle at 70% 25%, #9D6BFF55 0, transparent 28%),
+      linear-gradient(145deg,#21132A,#100812 72%);
+  }
+  .developer-hero::after{content:"";position:absolute;inset:12%;border:1px solid #ffffff10;border-radius:18px;box-shadow:inset 0 0 40px #FF2E7810;z-index:0;}
+.code-overlay {
+  position: absolute;
+  bottom: 7%;
+  z-index: 4;
+  padding: 12px 24px;          /* Clean, balanced padding for a strip layout */
+  border: 1px solid #ffffff16;
+  border-radius: 12px;
+  background: #0B0509dd;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 35px #0008;
+  
+  /* Sizing and Screen Centering */
+  width: max-content;          /* Keeps it fitted tightly to content */
+  max-width: 86%;              
+  left: 50%;                   
+  transform: translateX(-50%); 
+
+  /* Strip Alignment Fixes */
+  display: flex;               
+  flex-direction: row;         /* Places icon and text side-by-side on one line */
+  align-items: center;         /* Perfectly centers both vertically */
+  justify-content: center;     /* Perfectly centers both horizontally */
+  column-gap: 12px;            /* Adds a clean space between icon and text */
+}
+
+  .code-overlay span{grid-row:span 2;color:var(--pink);font-family:var(--display);font-size:21px;}
+  .code-overlay b{font-family:var(--display);font-size:12px;letter-spacing:.06em;}
+  .code-overlay small{color:var(--muted);font-size:10px;}
+
+  .hero-card{
+    position:relative;aspect-ratio:4/5;border-radius:22px;
+    background:linear-gradient(160deg,#1E1220,#140A16 60%);
+    border:1px solid var(--border);
+    box-shadow:0 0 0 1px #ffffff08, 0 30px 70px -30px #FF2E7855;
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  .hero-card::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(165deg, #FF2E7855 0%, transparent 45%, #4A1E8855 100%);
+    mix-blend-mode:color;
+  }
+  .hero-photo{width:100%;height:100%;object-fit:cover;object-position:top center;
+    filter:grayscale(35%) contrast(105%) brightness(0.92) saturate(115%);}
+  .chip{
+    position:absolute;font-family:var(--sans);font-size:12px;font-weight:600;
+    background:#1A1119;border:1px solid var(--border);color:var(--ink);
+    padding:7px 13px;border-radius:999px;z-index:3;box-shadow:0 8px 20px -8px #000a;
+  }
+  .chip-1{top:8%;left:8%;color:#FFB3CC;border-color:#FF2E7844;}
+  .chip-3{bottom:10%;right:4%;color:#C9B8FF;border-color:#9D6BFF44;}
+  .chip-2{top:42%;right:5%;color:#9FD0FF;border-color:#4F8EF744;}
+
+  /* ---- FOOTER PAGINATION (persistent) ---- */
+  .pager{
+  position:fixed;
+  left:24px;
+  right:24px;
+  bottom:18px;
+  z-index:55;
+
+  display:flex;
+  align-items:center;
+
+  font-family:var(--display);
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* Left side - page counter and dots */
+.pager .count{
+  letter-spacing:.05em;
+}
+
+.pager .dots{
+  display:flex;
+  gap:7px;
+  margin-left:14px;
+}
+
+/* Social icons - right side */
+.pager .socials{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-left:auto;
+}
+
+  .pager .count{letter-spacing:.05em;}
+  .pager .dots{display:flex;gap:7px;}
+  .pager .dots button{width:7px;height:7px;border-radius:50%;background:var(--border);border:none;cursor:pointer;padding:0;transition:background .15s, width .15s;}
+  .pager .dots button.active{background:var(--pink);width:18px;border-radius:4px;}
+  .pager .socials{display:flex;align-items:center;gap:12px;margin-left:4px;}
+  .pager .socials a{color:var(--muted);transition:color .15s;display:flex;align-items:center;justify-content:center;}
+  .pager .socials a:hover{color:var(--pink);}
+  .pager .socials svg{width:15px;height:15px;display:block;}
+  @media (max-width:640px){ .pager .socials{display:none;} }
+
+  .side-arrow{
+    position:fixed; top:50%; transform:translateY(-50%); z-index:55;
+    width:40px;height:40px;border-radius:50%;
+    background:var(--panel); border:1px solid var(--border); color:var(--ink);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;
+    transition:border-color .15s, color .15s, opacity .15s;
+  }
+  .side-arrow:hover{border-color:var(--pink); color:var(--pink);}
+  .side-arrow.prev{left:14px;} .side-arrow.next{right:14px;}
+  .side-arrow[disabled]{opacity:.2;pointer-events:none;}
+  @media (max-width:640px){ .side-arrow{width:32px;height:32px;font-size:13px;} }
+
+  /* ---- ABOUT ---- */
+  .about-body{font-size:15px;color:var(--muted);max-width:66ch;margin:0 auto 14px;text-align:left;}
+  .stat-row3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;}
+  @media (max-width:700px){.stat-row3{grid-template-columns:1fr;}}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-align:center;transition:border-color .15s, transform .15s;}
+  .stat-card:hover{border-color:var(--pink);transform:translateY(-3px);}
+  .stat-card .big{font-family:var(--display);font-weight:700;font-size:26px;color:var(--pink);}
+  .stat-card .lbl{font-size:12.5px;color:var(--muted);margin-top:6px;}
+
+  /* ---- ABOUT TOP GRID + FLIP CARD ---- */
+  .about-top{display:grid;grid-template-columns:1.3fr 0.9fr;gap:36px;align-items:start;margin-bottom:10px;}
+  @media (max-width:820px){.about-top{grid-template-columns:1fr;}}
+  .flip-wrap{perspective:1400px;}
+  .flip-card{position:relative;width:100%;max-width:280px;margin:0 auto;aspect-ratio:3/4;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.65,0,.35,1);cursor:pointer;}
+  .flip-card.flipped{transform:rotateY(180deg);}
+  .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 50px -24px #FF2E7855;}
+  .developer-art{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 70% 25%,#7C2AE855,transparent 30%),linear-gradient(145deg,#17101C,#09060A);}
+  .browser-bar{height:36px;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid #ffffff12;background:#120C14;color:var(--muted);font-size:9px;}
+  .browser-bar i{width:6px;height:6px;border-radius:50%;background:#ffffff20;}.browser-bar span{margin-left:6px;}
+  .dev-screen{position:absolute;left:9%;right:9%;top:18%;height:48%;border:1px solid #ffffff18;border-radius:10px;background:#0D0910;display:flex;box-shadow:0 18px 40px #0008;overflow:hidden;}
+  .dev-sidebar{width:18%;border-right:1px solid #ffffff10;background:linear-gradient(#FF2E7818,#9D6BFF10);}
+  .dev-code{padding:15px 12px;display:flex;flex-direction:column;gap:7px;font-family:monospace;font-size:8px;color:#CFC5D4;line-height:1.25;}
+  .dev-code b{color:#FF7AA8;font-size:9px;margin-bottom:2px;}.dev-code span:nth-child(3){color:#A8C7FF;}.dev-code span:nth-child(5){color:#C6A8FF;}
+  .dev-badge{position:absolute;left:10%;bottom:12%;font-family:var(--display);font-size:10px;color:#B3A6B2;line-height:1.3;letter-spacing:.08em;}.dev-badge strong{font-size:16px;color:#F6F1F4;letter-spacing:.01em;}
+  .dev-orbit{position:absolute;width:34px;height:34px;border-radius:10px;border:1px solid #ffffff18;background:#1A1119;display:flex;align-items:center;justify-content:center;font:700 10px var(--display);box-shadow:0 10px 25px #0008;}.orbit-a{right:8%;top:30%;color:#FFD34D;}.orbit-b{right:17%;bottom:25%;color:#9FD0FF;}.orbit-c{right:7%;bottom:10%;color:#C6A8FF;}
+
+  .flip-front{background:#000;}
+  .flip-front img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(35%) contrast(105%) brightness(0.92) saturate(115%);}
+  .flip-front::after{content:"";position:absolute;inset:0;background:linear-gradient(165deg,#FF2E7855 0%, transparent 45%, #4A1E8855 100%);mix-blend-mode:color;}
+  .flip-hint{position:absolute;left:0;right:0;bottom:0;padding:9px;text-align:center;font-size:11px;font-weight:600;color:#fff;background:linear-gradient(0deg,#000c,transparent);z-index:2;}
+  .flip-back{transform:rotateY(180deg);background:linear-gradient(160deg,#1E1220,#140A16 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;gap:6px;}
+  .flip-back .flb-eyebrow{font-size:11px;color:var(--pink);font-weight:600;letter-spacing:.06em;}
+  .flip-back .flb-title{font-family:var(--display);font-weight:700;font-size:16px;line-height:1.3;}
+  .flip-back .flb-sub{font-size:12px;color:var(--muted);}
+
+  /* ---- SKILLS ---- */
+#slide-2 .slide-inner.center{
+  justify-content:flex-start;
+  height:auto;
+  padding-top:10px;
+}
+  .skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:760px){.skill-grid{grid-template-columns:1fr;}}
+  .skill-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .15s, transform .15s;}
+  .skill-card:hover{border-color:var(--pink);transform:translateY(-3px);}
+  .skill-card.wide{grid-column:1 / -1;}
+  .skill-card h3{font-family:var(--display);font-size:15px;margin:0 0 14px;display:flex;align-items:center;gap:9px;}
+  .skill-card h3 .ic{color:var(--pink);}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{font-size:12.5px;background:#ffffff08;color:var(--ink);padding:7px 13px;border-radius:8px;border:1px solid var(--border);}
+
+  /* ---- PROJECTS ---- */
+  .proj-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:26px;flex-wrap:wrap;gap:10px;}
+  .proj-head h2{font-family:var(--display);font-size:clamp(22px,3vw,28px);font-weight:700;margin:0 0 6px;display:flex;align-items:center;gap:10px;}
+  .proj-head p{color:var(--muted);font-size:14.5px;margin:0;}
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media (max-width:760px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .15s, transform .15s;}
+  .proj-card:hover{border-color:var(--pink);transform:translateY(-3px);}
+  .proj-cover{
+    height:88px; display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:700;font-size:15px;color:#fff;letter-spacing:.02em;
+  }
+  .cover-1{background:linear-gradient(120deg,#FF2E78,#7C2AE8);}
+  .cover-2{background:linear-gradient(120deg,#4F8EF7,#7C2AE8);}
+  .cover-3{background:linear-gradient(120deg,#FF7A2E,#FF2E78);}
+  .cover-4{background:linear-gradient(120deg,#22C1A0,#4F8EF7);}
+  .proj-body{padding:18px 20px 20px;}
+  .proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+  .proj-name{font-family:var(--display);font-weight:600;font-size:15px;}
+  .badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px;white-space:nowrap;}
+  .badge-progress{background:#FF7A2E22;color:#FFA968;}
+  .badge-done{background:#22C1A022;color:#5FE3C9;}
+  .proj-desc{color:var(--muted);font-size:13.3px;margin:0 0 12px;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+  .proj-tags span{font-size:10.5px;color:#D8CCE0;border:1px solid var(--border);padding:2px 8px;border-radius:6px;}
+  .proj-link{font-size:12.5px;font-weight:600;color:var(--pink);display:inline-flex;align-items:center;gap:5px;}
+
+  /* ---- EXPERIENCE ---- */
+  .exp-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:28px;}
+  .exp-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;align-items:baseline;}
+  .exp-role{font-family:var(--display);font-weight:600;font-size:16px;}
+  .exp-date{font-size:12px;color:var(--muted);}
+  .exp-org{color:var(--pink);font-size:13.5px;font-weight:600;margin:3px 0 10px;}
+  .exp-card ul{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px;}
+  .exp-card li{margin-bottom:5px;}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  @media (max-width:760px){.two-col{grid-template-columns:1fr;}}
+  .mini-head{font-family:var(--display);font-size:14px;font-weight:600;margin:0 0 12px;color:var(--ink);}
+  .edu-row{padding:11px 0;border-bottom:1px solid var(--border);}
+  .edu-row:last-child{border-bottom:none;}
+  .edu-name{font-weight:600;font-size:13.5px;}
+  .edu-sub{color:var(--muted);font-size:12px;}
+  .edu-date{font-size:11px;color:var(--muted);margin-top:2px;}
+  .cert-card{border:1px solid var(--border);border-radius:9px;padding:12px 14px;background:var(--panel);font-size:12.5px;margin-bottom:9px;}
+  .cert-card .cert-org{color:var(--muted);font-size:11px;margin-top:2px;}
+
+  /* ---- CONTACT ---- */
+  .contact-sub{text-align:center;color:var(--muted);font-size:14.5px;max-width:52ch;margin:0 auto 34px;}
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:26px 20px;text-align:center;transition:border-color .15s, transform .15s;}
+  .contact-card:hover{transform:translateY(-3px);}
+  .contact-card .ic{font-size:22px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;}
+  .contact-card .ic svg{width:24px;height:24px;}
+  .contact-card .lbl{font-size:11px;color:var(--muted);letter-spacing:.08em;margin-bottom:6px;}
+  .contact-card .val{font-family:var(--display);font-weight:600;font-size:14.5px;}
+  .contact-card .sub{font-size:12px;color:var(--muted);margin-top:4px;}
+  .contact-card.email:hover{border-color:var(--pink);}
+  .contact-card.linkedin:hover{border-color:var(--blue);}
+  .contact-card.github:hover{border-color:var(--purple);}
+  .foot-note{text-align:center;color:var(--muted);font-size:11.5px;margin-top:38px;}
+  .scroll-hint{text-align:center;font-size:12px;color:var(--muted);margin:-14px auto 30px;display:flex;align-items:center;justify-content:center;gap:6px;}
+  .scroll-hint .arrow{color:var(--pink);animation:bob 1.6s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
+  @media (prefers-reduced-motion: reduce){ .scroll-hint .arrow{animation:none;} }
+
+  /* ---- RESPONSIVE FINE-TUNING ---- */
+  @media (max-width:1024px){
+    .slide-inner{max-width:760px;}
+    .about-top{gap:26px;}
+  }
+  @media (max-width:900px){
+    :root{--nav-h:56px;}
+    .nav-inner{padding:0 18px;gap:10px;}
+    .tabs{gap:18px;}
+    .logo{font-size:16px;}
+  }
+  @media (max-width:640px){
+    .slide{padding:34px 20px 84px;}
+    .hero-card{aspect-ratio:16/10;}
+    .btn{padding:11px 18px;font-size:13px;}
+    .pager{left:16px;bottom:14px;gap:10px;}
+    .side-arrow{display:none;}
+    .flip-card{max-width:220px;}
+  }
+  @media (max-width:420px){
+    .nav-inner{padding:0 14px;}
+    .tabs{gap:14px;}
+    .tab{font-size:12.5px;}
+    .slide{padding:28px 16px 88px;}
+    .badge-pill{font-size:10.5px;padding:7px 12px;}
+    .stat-card{padding:18px;}
+    .contact-card{padding:20px 14px;}
+    .pager{font-size:11px;left:12px;bottom:12px;}
+    .flip-card{max-width:180px;}
+  }
+  @media (max-width:340px){
+    .tabs{gap:10px;}
+    .tab{font-size:11.5px;}
+    .logo{font-size:14px;}
+  }
+  @media (max-height:560px) and (orientation:landscape){
+    :root{--nav-h:48px;}
+    .slide{padding:18px 24px 60px;}
+    .hero-card{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .about-top{grid-template-columns:1fr;}
+    .flip-wrap{display:none;}
+  }
+
+  .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin:20px 0 26px;max-width:66ch;margin-left:auto;margin-right:auto;}
+  @media (max-width:700px){.check-grid{grid-template-columns:1fr;}}
+  .check-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink);}
+  .check-item .tick{color:var(--pink);font-weight:700;flex-shrink:0;}
+  .sub-lbl{font-family:var(--display);font-weight:600;font-size:14.5px;margin:26px auto 4px;max-width:66ch;text-align:left;}
+</style>
 </head>
 <body>
 
-<div class="grid-overlay" aria-hidden="true"></div>
-<div class="scroll-progress" id="scroll-progress"></div>
+<div class="glow"></div>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="#hero" class="logo-tab">TA</a>
-    <nav class="main-nav" id="main-nav">
-      <a href="#hero" data-nav-link>Home</a>
-      <a href="#about" data-nav-link>About</a>
-      <a href="#skills" data-nav-link>Skills</a>
-      <a href="#experience" data-nav-link>Experience</a>
-      <a href="#projects" data-nav-link>Projects</a>
-      <a href="#contact" data-nav-link>Contact</a>
-    </nav>
-    <div class="topbar-controls">
-      <button class="mode-toggle" id="mode-toggle" aria-label="Toggle dark mode">
-        <i class="fa-solid fa-moon" id="mode-icon"></i>
-      </button>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<header>
+  <nav class="nav-inner" aria-label="Primary">
+    <span class="logo">TASHFAH<span class="dot"></span></span>
+    <div class="tabs">
+      <button class="tab active" data-slide="0">Home</button>
+      <button class="tab" data-slide="1">About</button>
+      <button class="tab" data-slide="2">Skills</button>
+      <button class="tab" data-slide="3">Web</button>
+      <button class="tab" data-slide="4">AI &amp; Data</button>
+      <button class="tab" data-slide="5">Experience</button>
+      <button class="tab" data-slide="6">Contact</button>
     </div>
-  </div>
+  </nav>
 </header>
 
-<main>
+<button class="side-arrow prev" id="prevBtn" aria-label="Previous section">&#8592;</button>
+<button class="side-arrow next" id="nextBtn" aria-label="Next section">&#8594;</button>
 
-  <section class="sheet hero" id="hero">
-    <p class="sheet-label">Sheet 01 / Intro</p>
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>Tashfah Ashraf</h1>
-        <p class="hero-role">
-          <span class="typing-text" id="typing-text"></span>
-        </p>
-        <p class="hero-desc">I build clean, responsive interfaces and I'm currently sharpening my full-stack skills through hands-on projects and a Full Stack Web Development with AI certification.</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">View work</a>
-          <a href="#contact" class="btn btn-secondary">Contact</a>
-          <a href="Tashfah-Ashraf-CV.pdf" class="btn btn-secondary" download>
-            <i class="fa-solid fa-download"></i> Download CV
-          </a>
-        </div>
-        <div class="hero-socials">
-          <a href="https://github.com/TashfahAshraf" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/tashfahashraf/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="mailto:tashfahashraf@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-      </div>
-      <div class="hero-photo-wrap">
-        <div class="hero-photo-frame">
-          <img src="1.jpg" alt="Portrait of Tashfah Ashraf" class="hero-photo" onerror="this.onerror=null;this.src='assets/avatar.svg';">
-        </div>
-      </div>
-    </div>
+<div class="viewport">
+  <div class="track" id="track">
 
-    <div class="stats-grid" data-reveal>
-      <div class="stat-card">
-        <p class="stat-number" data-count="9">0</p>
-        <p class="stat-label">Projects completed</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-number" data-count="12">0</p>
-        <p class="stat-label">Technologies learned</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-number" data-count="2">0</p>
-        <p class="stat-label">Certifications</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="sheet about" id="about" data-reveal>
-    <p class="sheet-label">Sheet 02 / About</p>
-    <div class="about-content">
-      <div class="about-text">
-        <h2>About</h2>
-        <p>I'm an IT student specializing in full-stack web development, with hands-on experience building responsive websites using HTML, CSS, JavaScript, and PHP, alongside academic experience in Python-based AI/ML projects.</p>
-        <p>I'm currently completing a Full Stack Web Development with AI certification at ISTTA, Arfa Karim Towers, and I bring skills in version control (Git/GitHub), database fundamentals, and project ownership from managing university group projects. I'm looking to contribute to real-world web development teams.</p>
-      </div>
-      <div class="spec-panel">
-        <div class="spec-row">
-          <span class="spec-key">Education</span>
-          <span class="spec-val">BS Information Technology, UMT Lahore (2023&ndash;Expected 2027)</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Focus</span>
-          <span class="spec-val">Full-stack web development</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Certifications</span>
-          <span class="spec-val">Full Stack Web Dev with AI (ISTTA, in progress) &middot; Certified Digital Media Marketer (PNY Trainings, 2024)</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Based in</span>
-          <span class="spec-val">Lahore, Pakistan</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sheet skills" id="skills" data-reveal>
-    <p class="sheet-label">Sheet 03 / Skills</p>
-    <h2>Skills</h2>
-    <div class="skills-groups">
-
-      <div class="skills-group">
-        <h3>Frontend</h3>
-        <div class="skill-item" data-reveal style="--fill:95%">
-          <div class="skill-item-head"><span>HTML5</span><span>95%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-        <div class="skill-item" data-reveal style="--fill:90%">
-          <div class="skill-item-head"><span>CSS3</span><span>90%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-        <div class="skill-item" data-reveal style="--fill:80%">
-          <div class="skill-item-head"><span>JavaScript</span><span>80%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-        <div class="skill-item" data-reveal style="--fill:80%">
-          <div class="skill-item-head"><span>Bootstrap</span><span>80%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-      </div>
-
-      <div class="skills-group">
-        <h3>Backend</h3>
-        <div class="skill-item" data-reveal style="--fill:70%">
-          <div class="skill-item-head"><span>PHP</span><span>70%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-        <div class="skill-item" data-reveal style="--fill:75%">
-          <div class="skill-item-head"><span>SQL</span><span>75%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-      </div>
-
-      <div class="skills-group">
-        <h3>Programming</h3>
-        <div class="skill-item" data-reveal style="--fill:75%">
-          <div class="skill-item-head"><span>Python</span><span>75%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-        <div class="skill-item" data-reveal style="--fill:65%">
-          <div class="skill-item-head"><span>C++</span><span>65%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-      </div>
-
-      <div class="skills-group">
-        <h3>Tools</h3>
-        <div class="skill-item" data-reveal style="--fill:85%">
-          <div class="skill-item-head"><span>Git &amp; GitHub</span><span>85%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="sheet experience" id="experience" data-reveal>
-    <p class="sheet-label">Sheet 04 / Experience</p>
-    <h2>Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <div class="timeline-head">
-            <h3>IT Intern &mdash; Data Science Intern</h3>
-            <span class="timeline-date">Jul 2025 &ndash; Sep 2025</span>
+    <!-- 0 HOME -->
+    <div class="slide" id="slide-0">
+      <div class="slide-inner center">
+        <div class="hero-grid">
+          <div>
+            <span class="badge-pill"><span class="dot"></span>FULL-STACK DEVELOPER &middot; AI ENTHUSIAST</span>
+            <h1 class="name">Hi, I'm Tashfah Ashraf.</h1>
+            <p class="tagline">I build <span class="accent">Web Apps &amp; Applied AI</span></p>
+            <p class="role-line">From PHP-backed login portals to LSTM stock models — I turn what I learn into real, deployed projects.</p>
+            <div class="hero-cta">
+              <button class="btn btn-primary" data-goto="3">View Projects</button>
+              <a class="btn btn-ghost" href="https://github.com/TashfahAshraf" target="_blank" rel="noopener">GitHub</a>
+              <button class="btn btn-ghost" data-goto="6">Contact Me</button>
+            </div>
           </div>
-          <p class="timeline-org">Arch Technologies</p>
+          <div class="hero-card developer-hero">
+            <div class="code-overlay"><span>&lt;/&gt;</span><b>WEB DEVELOPER</b></div>
+            <img class="hero-photo" src="profile.jpeg" alt="Tashfah Ashraf">
+            <span class="chip chip-1">Python</span>
+            <span class="chip chip-2">React &amp; PHP</span>
+            <span class="chip chip-3">AI/ML</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1 ABOUT -->
+    <div class="slide" id="slide-1">
+      <div class="slide-inner top-align">
+        <p class="eyebrow-center">INTRODUCTION</p>
+        <h2 class="center">About Me</h2>
+        <div class="underline"></div>
+        <p class="scroll-hint"> <span class="arrow">&#8595;</span></p>
+
+        <div class="about-top">
+          <div>
+            <p class="about-body" style="margin-left:0;">I'm a Full Stack Web Developer who enjoys turning ideas into modern, responsive, and interactive websites and web applications — the kind that are designed to look professional, perform smoothly, and provide a genuinely great user experience from the very first click. I care as much about how a product feels to use as I do about the code running underneath it, and I bring that same attention to detail to every project I take on.</p>
+            <p class="about-body" style="margin-left:0;">Whether you need a high-converting landing page, an animated business website, a custom dashboard, or a complete database-driven web application, I can help turn your idea into a functional and polished digital product — one that's built to scale, easy to maintain, and tailored to exactly what your users need.</p>
+          </div>
+          <div class="flip-wrap">
+            <div class="flip-card" id="flipCard" role="button" tabindex="0" aria-label="Flip to see current education">
+              <div class="flip-face flip-front">
+                <img src="neon-city-future-stockcake.jpg" alt="WEB DEVELOPER">
+                <span class="flip-hint">&#8635; Click to flip</span>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="flb-eyebrow">CURRENTLY STUDYING</span>
+                <span class="flb-title">Bachelor of Science<br>in Information Technology</span>
+                <span class="flb-sub">University of Management &amp; Technology, Lahore</span>
+                <span class="flb-sub">2023 – Expected 2027</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="sub-lbl">Here's what I can help you build:</p>
+        <div class="check-grid">
+          <div class="check-item"><span class="tick">&#10003;</span>Responsive websites and landing pages</div>
+          <div class="check-item"><span class="tick">&#10003;</span>Modern and interactive user interfaces</div>
+          <div class="check-item"><span class="tick">&#10003;</span>Animated websites with smooth scroll-based effects</div>
+          <div class="check-item"><span class="tick">&#10003;</span>Full Stack web applications</div>
+          <div class="check-item"><span class="tick">&#10003;</span>Custom dashboards and admin panels</div>
+          <div class="check-item"><span class="tick">&#10003;</span>Database-driven systems</div>
+          <div class="check-item"><span class="tick">&#10003;</span>REST API integration</div>
+          <div class="check-item"><span class="tick">&#10003;</span>Frontend and backend functionality</div>
+          <div class="check-item"><span class="tick">&#10003;</span>Website improvements, bug fixes, and optimization</div>
+        </div>
+
+        <p class="about-body" style="margin-left:auto;margin-right:auto;"><strong>My technical toolkit spans the full stack:</strong> HTML, CSS, JavaScript, React, Node.js, PHP, MongoDB, SQL, Bootstrap, REST APIs, Git, and GitHub — giving me the flexibility to move comfortably between frontend interfaces and backend logic on the same project.</p>
+        <p class="about-body" style="margin-left:auto;margin-right:auto;">Along the way, I've built hands-on experience across a wide range of projects — from interactive and animated websites to real-time API-driven applications, multi-role management systems, custom dashboards, and even AI-powered web platforms — each one teaching me something new about writing better, more reliable code.</p>
+        <p class="about-body" style="margin-left:auto;margin-right:auto;">I focus on writing clean, maintainable code and creating websites and applications that stay responsive, functional, and easy to use across every device and screen size, because a great product should work just as well on a phone as it does on a desktop.</p>
+        <p class="about-body" style="margin-left:auto;margin-right:auto;">My goal is simple: to understand your requirements clearly and deliver a reliable, professional solution that brings your idea to life — without unnecessary back-and-forth or guesswork. If you're looking for a developer who can combine modern frontend design with full-stack functionality, feel free to reach out. Let's discuss your project and build something great together.</p>
+
+        <div class="stat-row3">
+          <div class="stat-card"><div class="big">Full-Stack</div><div class="lbl">Web Developer</div></div>
+          <div class="stat-card"><div class="big">9+</div><div class="lbl">Projects Built</div></div>
+          <div class="stat-card"><div class="big">Open</div><div class="lbl">To Work</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 SKILLS -->
+    <div class="slide" id="slide-2">
+      <div class="slide-inner center">
+        <p class="eyebrow-center">SKILLS</p>
+        <h2 class="center">Technical Skills</h2>
+        <div class="underline"></div>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <h3><span class="ic">&lt;/&gt;</span> Web Technologies</h3>
+            <div class="tag-row"><span class="tag">Full-Stack Development</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">Bootstrap</span><span class="tag">Responsive Design</span><span class="tag">Web Application Development</span></div>
+          </div>
+          <div class="skill-card">
+            <h3><span class="ic">&#9679;</span> Frameworks &amp; Backend</h3>
+            <div class="tag-row"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">MySQL</span><span class="tag">SQL</span><span class="tag">REST API</span></div>
+          </div>
+          <div class="skill-card">
+            <h3><span class="ic">&#9679;</span> Programming Languages</h3>
+            <div class="tag-row"><span class="tag">Python</span><span class="tag">C++</span></div>
+          </div>
+          <div class="skill-card">
+            <h3><span class="ic">&#10052;</span> Data Science / ML</h3>
+            <div class="tag-row"><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Scikit-learn</span><span class="tag">TensorFlow / Keras</span><span class="tag">LSTM</span><span class="tag">Matplotlib</span><span class="tag">Data Visualization</span></div>
+          </div>
+          <div class="skill-card">
+            <h3><span class="ic">&#128451;</span> Database &amp; Version Control</h3>
+            <div class="tag-row"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Pull Requests</span><span class="tag">Code Review</span><span class="tag">DB Design</span></div>
+          </div>
+          <div class="skill-card">
+            <h3><span class="ic">&#127912;</span> Design &amp; Working Style</h3>
+            <div class="tag-row"><span class="tag">UI/UX Prototyping</span><span class="tag">Solution Oriented</span><span class="tag">Accountable for Outcomes</span></div>
+          </div>
+          <div class="skill-card wide">
+            <h3><span class="ic">&#128295;</span> Tools</h3>
+            <div class="tag-row"><span class="tag">VS Code</span><span class="tag">GitHub</span><span class="tag">Canva</span><span class="tag">n8n</span><span class="tag">+ more</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 WEB PROJECTS -->
+    <div class="slide" id="slide-3">
+      <div class="slide-inner top-align">
+        <div class="proj-head">
+          <div>
+            <h2>&#128187; Web Development</h2>
+            <p>Building responsive, multi-role sites with clean navigation and real backend logic.</p>
+          </div>
+        </div>
+        <div class="proj-grid">
+          <div class="proj-card">
+            <div class="proj-cover cover-3">Coffee Shop Website</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">Coffee Shop Website</span><span class="badge badge-progress">in progress</span></div>
+              <p class="proj-desc">An animated coffee-shop landing page currently being rebuilt into a full-stack application with a database-driven backend.</p>
+              <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Full-Stack (WIP)</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf/coffee-website" target="_blank" rel="noopener">View on GitHub &rarr;</a><br>
+              <a class="proj-link" href=" https://tashfahashraf.github.io/coffee-website/" target="_blank" rel="noopener">Live Demo &rarr;</a>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cover cover-4">Weather Dashboard</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">Weather Dashboard</span><span class="badge badge-done">deployed</span></div>
+              <p class="proj-desc">A deployed weather app for front-end practice, powered by the Open-Meteo API.</p>
+              <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>API Integration</span></div>
+              <a class="proj-link" href=" https://github.com/TashfahAshraf/weather-dashboard" target="_blank" rel="noopener">View on GitHub &rarr;</a><br>
+              <a class="proj-link" href=" https://tashfahashraf.github.io/weather-dashboard/" target="_blank" rel="noopener">Live Demo &rarr;</a>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cover cover-3">Portfolio Website</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">Portfolio Website</span><span class="badge badge-done">deployed</span></div>
+              <p class="proj-desc">This personal portfolio, built and deployed as a front-end practice project.</p>
+              <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf/Portfolio" target="_blank" rel="noopener">View on GitHub &rarr;</a><br>
+              <a class="proj-link" href="https://tashfahashraf.github.io/portfolio-website/" target="_blank" rel="noopener">Live Demo &rarr;</a>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cover cover-1">Course Portal</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">Course Registration &amp; Login Portal</span><span class="badge badge-done">completed</span></div>
+              <p class="proj-desc">A multi-page course registration site with separate student and teacher login portals, structuring listings and navigation around two distinct user roles.</p>
+              <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cover cover-2">EventPage</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">EventPage</span><span class="badge badge-done">completed</span></div>
+              <p class="proj-desc">A responsive event webpage built with a team using individual branches and pull requests, including resolving a simulated merge conflict via GitHub Issues.</p>
+              <div class="proj-tags"><span>HTML</span><span>CSS</span><span>Git</span><span>GitHub</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 AI & DATA PROJECTS -->
+    <div class="slide" id="slide-4">
+      <div class="slide-inner top-align">
+        <div class="proj-head">
+          <div>
+            <h2>&#129504; AI &amp; Data Science</h2>
+            <p>Exploring intelligent systems through deep learning, classification, and clustering.</p>
+          </div>
+        </div>
+        <div class="proj-grid">
+          <div class="proj-card">
+            <div class="proj-cover cover-4">CloudTraffic-AI</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">CloudTraffic-AI</span><span class="badge badge-progress">in progress</span></div>
+              <p class="proj-desc">A multi-violation traffic enforcement platform using deep learning to detect speeding, wrong-way driving, and driver distraction, with a dashboard for e-challans.</p>
+              <div class="proj-tags"><span>YOLO</span><span>OpenCV</span><span>Python</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf/CloudTraffic-AI" target="_blank" rel="noopener">View on GitHub &rarr;</a><br>
+               <a class="proj-link" href="https://tashfahashraf.github.io/CloudTraffic-AI/" target="_blank" rel="noopener">Live Demo (in progress) &rarr;</a>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cover cover-1">Stock Prediction</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">Stock Price Prediction</span><span class="badge badge-done">completed</span></div>
+              <p class="proj-desc">Linear Regression and LSTM models predicting next-day closing prices from OHLCV data with a 60-day lookback, benchmarked using MAE, RMSE and R².</p>
+              <div class="proj-tags"><span>TensorFlow</span><span>Keras</span><span>Pandas</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf/Stock-Price-Prediction" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cover cover-2">Customer Segments</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">Customer Segmentation</span><span class="badge badge-done">completed</span></div>
+              <p class="proj-desc">K-Means clustering to segment customers, using the Elbow Method and Silhouette Score to determine the optimal number of clusters.</p>
+              <div class="proj-tags"><span>Scikit-learn</span><span>Python</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cover cover-3">Titanic ML</div>
+            <div class="proj-body">
+              <div class="proj-top"><span class="proj-name">Titanic Survival Classification</span><span class="badge badge-done">completed</span></div>
+              <p class="proj-desc">A classification model predicting passenger survival, comparing Random Forest against Logistic Regression.</p>
+              <div class="proj-tags"><span>Scikit-learn</span><span>Python</span></div>
+              <a class="proj-link" href="https://github.com/TashfahAshraf" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 EXPERIENCE -->
+   <div class="slide" id="slide-5">
+      <div class="slide-inner center">
+        <p class="eyebrow-center">TRACK RECORD</p>
+        <h2 class="center">Experience &amp; Education</h2>
+        <div class="underline"></div>
+
+        <div class="exp-card">
+          <div class="exp-head"><span class="exp-role">Data Science Intern</span><span class="exp-date">Jul 2025 – Sep 2025</span></div>
+          <p class="exp-org">Arch Technologies</p>
           <ul>
             <li>Assisted with system troubleshooting and backend configuration, collaborating with the technical team to resolve issues.</li>
             <li>Prepared technical documentation to support ongoing development work and knowledge sharing.</li>
+            <li>Built and evaluated stock price prediction models (Linear Regression and LSTM) as part of internship project work.</li>
           </ul>
         </div>
+
+        <div class="two-col">
+          <div>
+            <p class="mini-head">Education</p>
+            <div class="edu-row"><div class="edu-name">BS Information Technology</div><div class="edu-sub">UMT, Lahore</div><div class="edu-date">2023 – Expected 2027</div></div>
+            <div class="edu-row"><div class="edu-name">Intermediate (FSc Pre-Medical)</div><div class="edu-sub">Kips College, Lahore &middot; 1st Div, Grade B</div><div class="edu-date">2021 – 2023</div></div>
+            <div class="edu-row"><div class="edu-name">Matriculation</div><div class="edu-sub">Allied School, Lahore &middot; 1st Div, Grade A</div><div class="edu-date">2019 – 2021</div></div>
+          </div>
+          <div>
+            <p class="mini-head">Certifications</p>
+            <div class="cert-card"><div>Certificate of Achievement</div><div class="cert-org">University of Management and Technology &middot; 2026</div></div>
+            <div class="cert-card"><div>Certified Digital Media Marketer</div><div class="cert-org">PNY Trainings &middot; 2024</div></div>
+            <div class="cert-card"><div>Internship Certificate</div><div class="cert-org">Arch Technologies &middot; 2025</div></div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section class="sheet projects" id="projects" data-reveal>
-    <p class="sheet-label">Sheet 05 / Projects</p>
-    <h2>Projects</h2>
-
-    <div class="project-filters" id="project-filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="frontend">Frontend</button>
-      <button class="filter-btn" data-filter="ai">AI</button>
-      <button class="filter-btn" data-filter="php">PHP</button>
-    </div>
-
-    <div class="project-grid">
-
-      <article class="project-card" data-reveal data-category="ai">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?traffic,highway" alt="CloudTraffic-AI dashboard screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-car-side thumb-fallback-icon"></i>
+    <!-- 6 CONTACT -->
+    <div class="slide" id="slide-6">
+      <div class="slide-inner center">
+        <h2 class="center">Let's Build Something Great</h2>
+        <p class="contact-sub">From creative interfaces to responsive web experiences, I’m always excited to work on new ideas. Let’s bring your vision to life.</p>
+        <div class="contact-grid">
+          <a class="contact-card email" href="mailto:tashfahashraf@gmail.com">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="4" width="21" height="16" rx="2.5"/><path d="m2.5 6 9.5 7 9.5-7"/></svg></div>
+            <div class="lbl">EMAIL</div>
+            <div class="val">tashfahashraf@gmail.com</div>
+            <div class="sub">Let's talk about a project</div>
+          </a>
+          <a class="contact-card linkedin" href="https://linkedin.com/in/tashfahashraf" target="_blank" rel="noopener">
+            <div class="ic" style="color:var(--blue);"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM.5 8.98h4.96V23.5H.5V8.98Zm7.98 0h4.76v1.98h.07c.66-1.25 2.28-2.57 4.7-2.57 5.02 0 5.95 3.31 5.95 7.61v8.5h-4.96v-7.54c0-1.8-.03-4.11-2.5-4.11-2.51 0-2.9 1.96-2.9 3.98v7.67H8.48V8.98Z"/></svg></div>
+            <div class="lbl">LINKEDIN</div>
+            <div class="val">Let’s Connect</div>
+            <div class="sub">Professional networking</div>
+          </a>
+          <a class="contact-card github" href="https://github.com/TashfahAshraf" target="_blank" rel="noopener">
+            <div class="ic" style="color:var(--purple);"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.02 2.84-.02 3.23 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg></div>
+            <div class="lbl">GITHUB</div>
+            <div class="val">Visit Profile</div>
+            <div class="sub">Explore open-source code</div>
+          </a>
         </div>
-        <div class="project-head">
-          <h3>CloudTraffic-AI</h3>
-          <span class="status-badge">In Progress</span>
-        </div>
-        <p>An intelligent web-based multi-violation traffic enforcement and analytics platform. Detects speeding, wrong-way driving, illegal overtaking, and phone usage from camera video using deep learning, then serves the results through a live web dashboard.</p>
-        <div class="project-tags">
-          <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>FastAPI</span>
-        </div>
-        <div class="project-links">
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> GitHub (Coming Soon)</span>
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="php">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?classroom,university" alt="Course Registration Portal screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-school thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>Course Registration &amp; Login Portal</h3>
-        </div>
-        <p>A web portal with separate student and teacher login flows for handling course registration, built with a PHP back end and a responsive front end.</p>
-        <div class="project-tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span>
-        </div>
-        <div class="project-links">
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> GitHub (Coming Soon)</span>
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="frontend">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?event,calendar" alt="EventPage screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-calendar-days thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>EventPage</h3>
-        </div>
-        <p>A team-built event listing page developed to practice real collaborative Git and GitHub workflows &mdash; branching, pull requests, code review, and resolving merge conflicts.</p>
-        <div class="project-tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/TashfahAshraf/EventPage-assignment-" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="ai">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?data,analytics" alt="Customer Segmentation project screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-chart-simple thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>Customer Segmentation</h3>
-        </div>
-        <p>Applied K-Means clustering to group customers by behavior and value, surfacing patterns that could support more targeted marketing decisions.</p>
-        <div class="project-tags">
-          <span>Python</span><span>K-Means</span><span>Data analysis</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/TashfahAshraf/Customer-Segmentation" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="ai">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?stock,finance,chart" alt="Stock Price Prediction screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-chart-line thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>Stock Price Prediction</h3>
-        </div>
-        <p>A data science internship project predicting next-day stock closing prices from historical OHLCV data, comparing a Linear Regression baseline against an LSTM deep learning model with a 60-day lookback window.</p>
-        <div class="project-tags">
-          <span>Python</span><span>TensorFlow/Keras</span><span>LSTM</span><span>Scikit-learn</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/TashfahAshraf/Stock-Price-Prediction" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="ai">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?ship,ocean" alt="Titanic Survival Classification screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-ship thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>Titanic Survival Classification</h3>
-        </div>
-        <p>A classic machine learning classification project predicting passenger survival on the Titanic using Random Forest and Logistic Regression models.</p>
-        <div class="project-tags">
-          <span>Python</span><span>Random Forest</span><span>Logistic Regression</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/TashfahAshraf/Titanic-Survival-Classification" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <span class="project-link disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo (Coming Soon)</span>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="frontend">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?weather,sky" alt="Weather Dashboard screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-cloud-sun thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>Weather Dashboard</h3>
-        </div>
-        <p>A clean, responsive weather app that lets users search any city and see current conditions &mdash; temperature, feels-like, humidity, and wind &mdash; powered by the Open-Meteo API.</p>
-        <div class="project-tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Open-Meteo API</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/TashfahAshraf/weather-dashboard" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <a class="project-link" href="https://tashfahashraf.github.io/weather-dashboard/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="frontend">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?coffee,cafe" alt="Coffee shop landing page screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-mug-hot thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>Brew &amp; Bloom &mdash; Coffee Shop Landing Page</h3>
-        </div>
-        <p>A warm, animated landing page for a fictional coffee shop, featuring a featured-drinks menu, brand story, testimonials, and a location section with an embedded map.</p>
-        <div class="project-tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/TashfahAshraf/coffee-website" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <a class="project-link" href="https://tashfahashraf.github.io/coffee-website/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-        </div>
-      </article>
-
-      <article class="project-card" data-reveal data-category="frontend">
-        <div class="project-thumb">
-          <img src="https://source.unsplash.com/800x500/?portfolio,workspace" alt="Portfolio website screenshot" onerror="this.parentElement.classList.add('thumb-fallback')">
-          <i class="fa-solid fa-briefcase thumb-fallback-icon"></i>
-        </div>
-        <div class="project-head">
-          <h3>Personal Portfolio Website</h3>
-        </div>
-        <p>This portfolio site itself &mdash; a responsive, blueprint-themed personal site with scroll animations, dark/light mode, project filtering, and a validated contact form.</p>
-        <div class="project-tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/TashfahAshraf/Portfolio" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <a class="project-link" href=" https://tashfahashraf.github.io/Portfolio/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <section class="sheet contact" id="contact" data-reveal>
-    <p class="sheet-label">Sheet 06 / Contact</p>
-    <h2>Contact</h2>
-    <div class="contact-content">
-      <p class="contact-intro">Have a role, project, or opportunity in mind? Send a message and I'll get back to you.</p>
-      <div class="contact-details">
-        <a href="mailto:tashfahashraf@gmail.com"><i class="fa-solid fa-envelope"></i> tashfahashraf@gmail.com</a>
-        <a href="tel:+923010067442"><i class="fa-solid fa-phone"></i> +92 301 0067442</a>
-      </div>
-      <form class="contact-form" id="contact-form" novalidate>
-        <div class="form-row">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required>
-          <span class="error-msg" id="name-error"></span>
-        </div>
-        <div class="form-row">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="name@company.com" required>
-          <span class="error-msg" id="email-error"></span>
-        </div>
-        <div class="form-row">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Tell me about the opportunity" required></textarea>
-          <span class="error-msg" id="message-error"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Send message</button>
-        <p class="form-status" id="form-status" role="status"></p>
-      </form>
-      <div class="socials">
-        <a href="https://github.com/TashfahAshraf" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/tashfahashraf/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="mailto:tashfahashraf@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <p class="foot-note">&copy; 2026 Tashfah Ashraf. All rights reserved.</p>
       </div>
     </div>
-  </section>
 
-</main>
-
-<footer class="title-block">
-  <div class="footer-row">
-    <p>Tashfah Ashraf &copy; <span id="year"></span></p>
-    <div class="footer-socials">
-      <a href="https://github.com/TashfahAshraf" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/tashfahashraf/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="mailto:tashfahashraf@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-    </div>
   </div>
-  <div class="footer-credit">
-    <p>Designed &amp; developed by Tashfah Ashraf</p>
-    <p>Built with HTML &bull; CSS &bull; JavaScript</p>
-  </div>
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-</footer>
+</div>
 
-<script src="script.js"></script>
+<div class="pager">
+  <span class="count" id="pagerCount">01 / 07</span>
+  <div class="dots" id="pagerDots">
+    <button data-slide="0" class="active"></button><button data-slide="1"></button><button data-slide="2"></button>
+    <button data-slide="3"></button><button data-slide="4"></button><button data-slide="5"></button><button data-slide="6"></button>
+  </div>
+  <div class="socials">
+    <a href="https://github.com/TashfahAshraf" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.02 2.84-.02 3.23 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+    </a>
+    <a href="https://linkedin.com/in/tashfahashraf" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM.5 8.98h4.96V23.5H.5V8.98Zm7.98 0h4.76v1.98h.07c.66-1.25 2.28-2.57 4.7-2.57 5.02 0 5.95 3.31 5.95 7.61v8.5h-4.96v-7.54c0-1.8-.03-4.11-2.5-4.11-2.51 0-2.9 1.96-2.9 3.98v7.67H8.48V8.98Z"/></svg>
+    </a>
+    <a href="mailto:tashfahashraf@gmail.com" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="4" width="21" height="16" rx="2.5"/><path d="m2.5 6 9.5 7 9.5-7"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  const track = document.getElementById('track');
+  const tabs = document.querySelectorAll('.tab');
+  const dots = document.querySelectorAll('.pager .dots button');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const pagerCount = document.getElementById('pagerCount');
+  const TOTAL = 7;
+  let current = 0;
+
+  function goTo(i){
+    current = Math.max(0, Math.min(TOTAL - 1, i));
+    track.style.transform = `translateX(-${current * (100 / TOTAL)}%)`;
+    tabs.forEach(t => t.classList.toggle('active', +t.dataset.slide === current));
+    dots.forEach(d => d.classList.toggle('active', +d.dataset.slide === current));
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === TOTAL - 1;
+    pagerCount.textContent = String(current+1).padStart(2,'0') + ' / ' + String(TOTAL).padStart(2,'0');
+  }
+
+  document.querySelectorAll('[data-slide]').forEach(el => el.addEventListener('click', () => goTo(+el.dataset.slide)));
+  document.querySelectorAll('[data-goto]').forEach(el => el.addEventListener('click', () => goTo(+el.dataset.goto)));
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowRight') goTo(current + 1);
+    if(e.key === 'ArrowLeft') goTo(current - 1);
+  });
+
+  let touchStartX = null;
+  window.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  window.addEventListener('touchend', e => {
+    if(touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 50){ dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+    touchStartX = null;
+  }, {passive:true});
+
+  goTo(0);
+
+  // About flip card
+  const flipCard = document.getElementById('flipCard');
+  if(flipCard){
+    flipCard.addEventListener('click', () => flipCard.classList.toggle('flipped'));
+    flipCard.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); flipCard.classList.toggle('flipped'); }
+    });
+  }
+
+  // Certification coverflow carousel
+  const certItems = document.querySelectorAll('#certTrack .cert-item');
+  const certPrev = document.getElementById('certPrev');
+  const certNext = document.getElementById('certNext');
+  let certActive = 0;
+  const certTotal = certItems.length;
+
+  function renderCerts(){
+    certItems.forEach((item, i) => {
+      let diff = i - certActive;
+      if(diff > certTotal/2) diff -= certTotal;
+      if(diff < -certTotal/2) diff += certTotal;
+      const offset = window.innerWidth < 640 ? 170 : 230;
+      const scale = diff === 0 ? 1 : 0.82;
+      const opacity = diff === 0 ? 1 : (Math.abs(diff) > 1 ? 0 : 0.45);
+      const z = 10 - Math.abs(diff);
+      item.style.transform = `translate(-50%,-50%) translateX(${diff*offset}px) scale(${scale}) rotateY(${diff*-10}deg)`;
+      item.style.opacity = opacity;
+      item.style.zIndex = z;
+      item.setAttribute('data-active', diff === 0 ? 'true' : 'false');
+    });
+  }
+  certItems.forEach((item, i) => item.addEventListener('click', () => { certActive = i; renderCerts(); }));
+  if(certPrev) certPrev.addEventListener('click', () => { certActive = (certActive - 1 + certTotal) % certTotal; renderCerts(); });
+  if(certNext) certNext.addEventListener('click', () => { certActive = (certActive + 1) % certTotal; renderCerts(); });
+  window.addEventListener('resize', renderCerts);
+  renderCerts();
+</script>
+
 </body>
 </html>
